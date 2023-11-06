@@ -3,58 +3,49 @@
 }
 
 body {
-  margin: 0;
   background-color: blueviolet;
+  margin: 0;
 }
 
-.game {
-  position: relative;
+
+.grid-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+
+.grid {
+  border: 1px solid black;
   width: 500px;
-  height: 500px;
 }
 
-.baby {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-image: url(../assets/baby.png);
-  transition: left 0.2s, bottom 0.2s;
-}
-
-.road {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.grid div {
+  display: inline-block;
+  aspect-ratio: 1;
   background-color: #888;
 }
-
-.car1,
-.car2,
-.van,
-.cyclist {
-  position: absolute;
-  width: 40px;
-  height: 20px;
+.baby {
+  background-image: url(../assets/baby.png);
+  background-size: cover;
 }
 
 .cyclist {
   background-image: url(../assets/cyclist.png);
+  background-size: cover;
 }
 
 .car1 {
   background-image: url(../assets/car1.png);
+  background-size: cover;
 }
 
 .car2 {
   background-image: url(../assets/car2.png);
+  background-size: cover;
 }
 
 .van {
   background-image: url(../assets/van.png);
-}
-
-.obstacle-image {
-  width: 100%;
-  height: 100%;
-  background-color: #000; 
+  background-size: cover;
 }
