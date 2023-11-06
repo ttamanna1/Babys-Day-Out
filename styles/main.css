@@ -25,42 +25,34 @@ body {
   aspect-ratio: 1;
   background-color: #888;
 }
-.baby {
-  position: absolute;
-  width: 50px; 
-  height: 50px;
-  background-image: url(../assets/baby.png);
+
+.cyclist, .car1, .car2, .van {
+  width: 100%;
+  height: 100%;
   background-size: cover;
+  background-repeat: no-repeat;
+} 
+
+.grid div.baby {
+  background-image: url(../assets/baby.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%; 
 }
 
 .cyclist {
-  position: absolute;
-  width: 50px; 
-  height: 50px;
   background-image: url(../assets/cyclist.png);
-  background-size: cover;
 }
 
 .car1 {
-  position: absolute;
-  width: 50px; 
-  height: 50px;
   background-image: url(../assets/car1.png);
-  background-size: cover;
 }
 
 .car2 {
-  position: absolute;
-  width: 50px; 
-  height: 50px;
   background-image: url(../assets/car2.png);
-  background-size: cover;
 }
 
 .van {
-  position: absolute;
-  width: 50px; 
-  height: 50px;
   background-image: url(../assets/van.png);
-  background-size: cover;
 }

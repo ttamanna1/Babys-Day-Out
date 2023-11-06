@@ -4,9 +4,8 @@
 // cells
 
 const grid = document.querySelector('.grid')
+const cells = []
 const startButton = document.getElementById('startButton')
-
-
 
 // ! VARIABLES
 
@@ -15,35 +14,13 @@ const startButton = document.getElementById('startButton')
 // set starting position of frog as const
 // set initial position of each obstacle
 
-const gameContainer = document.createElement('div')
-gameContainer.classList.add('game')
-grid.appendChild(gameContainer)
 
-const game = document.querySelector('.game')
 
-const baby = document.createElement('div')
-baby.classList.add('baby')
-game.appendChild(baby)
 
-const car1 = document.createElement('div')
-car1.classList.add('car1')
-game.appendChild(car1)
-
-const car2 = document.createElement('div')
-car2.classList.add('car2')
-game.appendChild(car2);
-
-const van = document.createElement('div')
-van.classList.add('van')
-game.appendChild(van)
-
-const cyclist = document.createElement('div')
-cyclist.classList.add('cyclist')
-game.appendChild(cyclist)
-
-let babyCell = 45
 let babyLives = 5
-let obstacleSpeed = 1
+
+const babyStartPosition = 45
+let currentPosition = babyStartPosition
 
 const car1Positions = [28, 29, 31, 32]
 const car2Positions = [15, 17, 19]
@@ -66,9 +43,16 @@ function createGrid() {
     cell.id = i
     cell.style.width = `${100 / width}%`
     cell.style.height = `${100 / width}%`
-    grid.append(cell)
-  
+    grid.appendChild(cell)
+    cells.push(cell)
   }
+  addBaby(currentPosition)
+
+  addCar1Obstacles();
+  addCar2Obstacles();
+  addVanObstacles();
+  addCyclistObstacles();
+
 }
 
 // ! EXECUTIONS
@@ -86,87 +70,75 @@ function createGrid() {
 // reset game and load welcome page (timer after message/score display or after click event on message/score display?)
 // * if different levels are added and the frog reaches home, the game shouldn't be reset but a new loop should be passed through
   // making the obstacles move faster using timers and/or possibly creating a bigger grid to make it more challenging
+// Function to create the baby and obstacles on the grid
 
-function gameLoop() {
-
-  function moveObstacles() {
-    
-    for (let i = 0; i < car1.length; i++) {
-      car1Positions[i] += obstacleSpeed;
-      if (car1Positions[i] > 42) {
-        car1Positions[i] = -car1Positions[i];
-      }
-      car1[i].style.right = `${car1Positions[i] * (100 / 7)}%`;
-    }
-
-    for (let i = 0; i < car2.length; i++) {
-      car2Positions[i] += obstacleSpeed;
-      if (car1Positions[i] > 42) {
-        car2Positions[i] = -car2Positions[i];
-      }
-      car2[i].style.left = `${car2Positions[i] * (100 / 7)}%`;
-    }
-  
-    for (let i = 0; i < van.length; i++) {
-      vanPositions[i] -= obstacleSpeed;
-      if (vanPositions[i] < 0) {
-        vanPositions[i] = 42 + vanPositions[i];
-      }
-      van[i].style.right = `${vanPositions[i] * (100 / 7)}%`;
-    }
-  
-    for (let i = 0; i < cyclist.length; i++) {
-      cyclistPositions[i] += obstacleSpeed;
-      if (cyclistPositions[i] > 42) {
-        cyclistPositions[i] = -cyclistPositions[i];
-      }
-      cyclist[i].style.left = `${cyclistPositions[i] * (100 / 7)}%`;
-    }
-  
-    checkCollisions();
-  }
-
-  function checkCollisions() {
-    for (let i = 0; i < car1Positions.length; i++) {
-        if (babyCell === car1Positions[i]) {
-            handleCollision()
-            return
-        }
-    }
-
-    for (let i = 0; i < car2Positions.length; i++) {
-        if (babyCell === car2Positions[i]) {
-            handleCollision()
-            return
-        }
-    }
-
-    for (let i = 0; i < vanPositions.length; i++) {
-        if (babyCell === vanPositions[i]) {
-            handleCollision()
-            return
-        }
-    }
-
-    for (let i = 0; i < cyclistPositions.length; i++) {
-        if (babyCell === cyclistPositions[i]) {
-            handleCollision()
-            return
-        }
-    }
-  }
-
-  function handleCollision() {
-    if (babyLives > 0) {
-        babyLives--
-        babyCell = 45;
-    }
-
-    if (babyLives === 0) {
-        resetGame();
-    }
-  }
+function addBaby() {
+  cells[currentPosition].classList.add('baby')
 }
+
+function removeBaby(){
+  cells[currentPosition].classList.remove('baby')
+}
+
+
+
+function keyPress(evt){
+  const key = evt.code
+
+  removeBaby()
+
+  if (key === 'ArrowUp' && currentPosition >= width) {
+    currentPosition -= width
+  } else if (key === 'ArrowDown' && currentPosition + width < cells.length) {
+    currentPosition += width
+  } else if (key === 'ArrowLeft' && currentPosition % width !== 0) {
+    currentPosition--
+  } else if (key === 'ArrowRight' && currentPosition % width !== width - 1) {
+    currentPosition++
+  }
+
+  addBaby()
+}
+
+// Create functions to add obstacles
+function addCar1Obstacles() {
+  car1Positions.forEach((position) => {
+    const car1 = document.createElement('div');
+    car1.classList.add('car1');
+    const cellElement = document.getElementById(position);
+    cellElement.appendChild(car1);
+  });
+}
+
+function addCar2Obstacles() {
+  car2Positions.forEach((position) => {
+    const car2 = document.createElement('div');
+    car2.classList.add('car2');
+    const cellElement = document.getElementById(position);
+    cellElement.appendChild(car2);
+  });
+}
+
+function addVanObstacles() {
+  vanPositions.forEach((position) => {
+    const van = document.createElement('div');
+    van.classList.add('van');
+    const cellElement = document.getElementById(position);
+    cellElement.appendChild(van);
+  });
+}
+
+function addCyclistObstacles() {
+  cyclistPositions.forEach((position) => {
+    const cyclist = document.createElement('div');
+    cyclist.classList.add('cyclist');
+    const cellElement = document.getElementById(position);
+    cellElement.appendChild(cyclist);
+  });
+}
+
+
+
 
 
 // ! EVENTS
@@ -185,4 +157,7 @@ function gameLoop() {
 // * Features
   // music, sound effects, transitions.
 
-  createGrid()
+document.addEventListener('keydown', keyPress)
+
+createGrid()
+
