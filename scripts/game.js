@@ -17,7 +17,7 @@ const startButton = document.getElementById('startButton')
 
 const gameContainer = document.createElement('div')
 gameContainer.classList.add('game')
-document.body.appendChild(gameContainer)
+grid.appendChild(gameContainer)
 
 const game = document.querySelector('.game')
 
@@ -43,6 +43,7 @@ game.appendChild(cyclist)
 
 let babyCell = 45
 let babyLives = 5
+let obstacleSpeed = 1
 
 const car1Positions = [28, 29, 31, 32]
 const car2Positions = [15, 17, 19]
@@ -70,7 +71,6 @@ function createGrid() {
   }
 }
 
-createGrid()
 // ! EXECUTIONS
 
 // * main game loop (setInterval) when lives are greater than 0- use keypress event using user input
@@ -86,6 +86,88 @@ createGrid()
 // reset game and load welcome page (timer after message/score display or after click event on message/score display?)
 // * if different levels are added and the frog reaches home, the game shouldn't be reset but a new loop should be passed through
   // making the obstacles move faster using timers and/or possibly creating a bigger grid to make it more challenging
+
+function gameLoop() {
+
+  function moveObstacles() {
+    
+    for (let i = 0; i < car1.length; i++) {
+      car1Positions[i] += obstacleSpeed;
+      if (car1Positions[i] > 42) {
+        car1Positions[i] = -car1Positions[i];
+      }
+      car1[i].style.right = `${car1Positions[i] * (100 / 7)}%`;
+    }
+
+    for (let i = 0; i < car2.length; i++) {
+      car2Positions[i] += obstacleSpeed;
+      if (car1Positions[i] > 42) {
+        car2Positions[i] = -car2Positions[i];
+      }
+      car2[i].style.left = `${car2Positions[i] * (100 / 7)}%`;
+    }
+  
+    for (let i = 0; i < van.length; i++) {
+      vanPositions[i] -= obstacleSpeed;
+      if (vanPositions[i] < 0) {
+        vanPositions[i] = 42 + vanPositions[i];
+      }
+      van[i].style.right = `${vanPositions[i] * (100 / 7)}%`;
+    }
+  
+    for (let i = 0; i < cyclist.length; i++) {
+      cyclistPositions[i] += obstacleSpeed;
+      if (cyclistPositions[i] > 42) {
+        cyclistPositions[i] = -cyclistPositions[i];
+      }
+      cyclist[i].style.left = `${cyclistPositions[i] * (100 / 7)}%`;
+    }
+  
+    checkCollisions();
+  }
+
+  function checkCollisions() {
+    for (let i = 0; i < car1Positions.length; i++) {
+        if (babyCell === car1Positions[i]) {
+            handleCollision()
+            return
+        }
+    }
+
+    for (let i = 0; i < car2Positions.length; i++) {
+        if (babyCell === car2Positions[i]) {
+            handleCollision()
+            return
+        }
+    }
+
+    for (let i = 0; i < vanPositions.length; i++) {
+        if (babyCell === vanPositions[i]) {
+            handleCollision()
+            return
+        }
+    }
+
+    for (let i = 0; i < cyclistPositions.length; i++) {
+        if (babyCell === cyclistPositions[i]) {
+            handleCollision()
+            return
+        }
+    }
+  }
+
+  function handleCollision() {
+    if (babyLives > 0) {
+        babyLives--
+        babyCell = 45;
+    }
+
+    if (babyLives === 0) {
+        resetGame();
+    }
+  }
+}
+
 
 // ! EVENTS
 
