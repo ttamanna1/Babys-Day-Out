@@ -1,7 +1,7 @@
 // ! VARIABLES
 
-// set game score (if different levels added)
-// set lives to 5
+
+// set lives to 3
 // set starting position of frog as const
 // set initial position of each obstacle
 
@@ -19,6 +19,7 @@ let currentPosition = babyStartPosition
 const width = 7
 let currentLives = 3
 let timer
+let checkTimer
 
 
 
@@ -76,6 +77,13 @@ function endGame() {
   clearInterval(timer)
   addBaby()
 }
+
+function check () {
+  collision()
+  win()
+}
+
+// * Functions to move obstacles * //
 
 function moveObstacle() {
   carsLeft.forEach(carLeft => moveCarLeft(carLeft))
@@ -167,6 +175,10 @@ function collision() {
 
     if (currentLives === 0) {
       endGame()
+    } else {
+      removeBaby()
+      currentPosition = babyStartPosition
+      addBaby()
     }
   
   }
@@ -188,6 +200,7 @@ function win() {
 
 startButton.addEventListener('click', () => {
   timer = setInterval(moveObstacle, 1000)
+  checkTimer = setInterval(check, 500)
   document.addEventListener('keydown', moveBaby)
 })
 
