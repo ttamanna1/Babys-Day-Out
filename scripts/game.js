@@ -70,8 +70,11 @@ function moveBaby(evt) {
 
 
 function endGame() {
-  removeBaby
+  removeBaby()
+  currentPosition = babyStartPosition
+  currentLives = 3
   clearInterval(timer)
+  addBaby()
 }
 
 function moveObstacle() {
@@ -176,14 +179,18 @@ function win() {
   }
 }
 
-timer = setInterval(moveObstacle, 1000)
+
 
 // ! EVENTS
 
 // click start button function
 // keypress event function
 
-document.addEventListener('keydown', moveBaby)
+startButton.addEventListener('click', () => {
+  timer = setInterval(moveObstacle, 1000)
+  document.addEventListener('keydown', moveBaby)
+})
+
 
 // ! PAGE LOAD
 
