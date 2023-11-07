@@ -56,7 +56,7 @@ function moveBaby(evt) {
 
   if (key === 'ArrowUp' && currentPosition >= width) {
     currentPosition -= width
-  } else if (key === 'ArrowDown' && currentPosition + width < width * width) {
+  } else if (key === 'ArrowDown' && currentPosition + width < cells.length - width) {
     currentPosition += width
   } else if (key === 'ArrowLeft' && currentPosition % width !== 0) {
     currentPosition -= 1
@@ -80,6 +80,7 @@ function moveObstacle() {
   vansLeft.forEach(vanLeft => moveVanLeft(vanLeft))
   carsRight.forEach(carRight => moveCarRight(carRight))
   collision()
+  win()
 }
 
 function moveCarLeft(carLeft) {
@@ -160,10 +161,19 @@ function collision() {
     removeBaby()
     currentLives --
     livesDisplay.innerText = currentLives
+
     if (currentLives === 0) {
       endGame()
     }
-  } 
+  
+  }
+}
+
+function win() {
+  if (cells[currentPosition].classList.contains('home')) {
+    alert('You made it!')
+    endGame()
+  }
 }
 
 timer = setInterval(moveObstacle, 1000)
