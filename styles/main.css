@@ -1,59 +1,59 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: blueviolet;
-  margin: 0;
-}
-
-
-.grid-wrapper {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} 
 
 .grid {
   border: 1px solid black;
-  width: 500px;
+  height: 700px;
+  width: 700px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .grid div {
-  display: inline-block;
-  aspect-ratio: 1;
-  background-color: #888;
-  
+  width: 100px;
+  height: 100px;
 }
 
-.cyclist, .car1, .car2, .van {
-  width: 100%;
-  height: 100%;
-  background-size: contain;
+.home {
+  background-image: url(../assets/parents.png);
+  background-size: cover;
   background-repeat: no-repeat;
-} 
+  background-color: burlywood;
+}
 
-.grid div.baby {
+.start {
+  background-color: burlywood;
+}
+
+.cyclist-right, .car-right, .car-left, .van-left {
+  background-color: #888;
+
+}
+
+.baby {
   background-image: url(../assets/baby.png);
   background-size: contain;
   background-repeat: no-repeat;
-  width: 100%;
-  height: 100%; 
 }
 
-.cyclist {
-  background-image: url(../assets/cyclist.png);
-}
-
-.car1 {
-  background-image: url(../assets/car1.png);
-}
-
-.car2 {
+.ob1, .ob2 {
   background-image: url(../assets/car2.png);
+  background-size: contain;
 }
 
-.van {
+.ob7, .ob8 {
+  background-image: url(../assets/cyclist.png);
+  background-size: contain;
+}
+
+.ob9, .ob10 {
   background-image: url(../assets/van.png);
+  background-size: contain;
+}
+
+.ob15, .ob16 {
+  background-image: url(../assets/car1.png);
+  background-size: contain;
+}
+
+.ob3, .ob4, .ob5, .ob6, .ob11, .ob12, .ob13, .ob14 {
+  background-color: #888;
 }

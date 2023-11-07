@@ -1,10 +1,3 @@
-// ! ELEMENTS
-
-// grid
-// cells
-
-
-
 // ! VARIABLES
 
 // set game score (if different levels added)
@@ -12,24 +5,23 @@
 // set starting position of frog as const
 // set initial position of each obstacle
 
+const livesDisplay = document.getElementById('lives-count')
+const startButton = document.querySelector('#start-button')
+const cells = document.querySelectorAll('.grid div')
+const carsLeft = document.querySelectorAll('.car-left')
+const cyclistsRight = document.querySelectorAll('.cyclist-right')
+const vansLeft = document.querySelectorAll('.van-left')
+const carsRight = document.querySelectorAll('.car-right')
 
-
-
-let babyLives = 5
-
-
+console.log(cells)
 const babyStartPosition = 45
 let currentPosition = babyStartPosition
-
-
-
-// ! GRID
-
-// create grid
-// 7*7 grid- set width
-// frog and obstacles on grid
-
 const width = 7
+let currentLives = 3
+let timer
+
+
+
 
 
 // ! EXECUTIONS
@@ -57,29 +49,131 @@ function removeBaby(){
   cells[currentPosition].classList.remove('baby')
 }
 
-function keyPress(evt){
+function moveBaby(evt) {
   const key = evt.code
 
   removeBaby()
 
   if (key === 'ArrowUp' && currentPosition >= width) {
     currentPosition -= width
-  } else if (key === 'ArrowDown' && currentPosition + width < cells.length) {
+  } else if (key === 'ArrowDown' && currentPosition + width < width * width) {
     currentPosition += width
   } else if (key === 'ArrowLeft' && currentPosition % width !== 0) {
-    currentPosition--
+    currentPosition -= 1
   } else if (key === 'ArrowRight' && currentPosition % width !== width - 1) {
-    currentPosition++
+    currentPosition += 1
   }
 
   addBaby()
+
 }
+
+
+function endGame() {
+  removeBaby
+  clearInterval(timer)
+}
+
+function moveObstacle() {
+  carsLeft.forEach(carLeft => moveCarLeft(carLeft))
+  cyclistsRight.forEach(cyclistRight => moveCyclistRight(cyclistRight))
+  vansLeft.forEach(vanLeft => moveVanLeft(vanLeft))
+  carsRight.forEach(carRight => moveCarRight(carRight))
+  collision()
+}
+
+function moveCarLeft(carLeft) {
+  if (carLeft.classList.contains('ob1')) {
+    carLeft.classList.remove('ob1')
+    carLeft.classList.add('ob2')
+  } else if (carLeft.classList.contains('ob2')) {
+    carLeft.classList.remove('ob2')
+    carLeft.classList.add('ob3')
+  } else if (carLeft.classList.contains('ob3')) {
+    carLeft.classList.remove('ob3')
+    carLeft.classList.add('ob4')
+  } else if (carLeft.classList.contains('ob4')) {
+    carLeft.classList.remove('ob4')
+    carLeft.classList.add('ob1')
+  }
+}
+
+function moveCyclistRight(cyclistRight) {
+  if (cyclistRight.classList.contains('ob5')) {
+    cyclistRight.classList.remove('ob5')
+    cyclistRight.classList.add('ob8')
+  } else if (cyclistRight.classList.contains('ob8')) {
+    cyclistRight.classList.remove('ob8')
+    cyclistRight.classList.add('ob7')
+  } else if (cyclistRight.classList.contains('ob7')) {
+    cyclistRight.classList.remove('ob7')
+    cyclistRight.classList.add('ob6')
+  } else if (cyclistRight.classList.contains('ob6')) {
+    cyclistRight.classList.remove('ob6')
+    cyclistRight.classList.add('ob5')
+  }
+}
+
+function moveVanLeft(vanLeft) {
+  if (vanLeft.classList.contains('ob9')) {
+    vanLeft.classList.remove('ob9')
+    vanLeft.classList.add('ob10')
+  } else if (vanLeft.classList.contains('ob10')) {
+    vanLeft.classList.remove('ob10')
+    vanLeft.classList.add('ob11')
+  } else if (vanLeft.classList.contains('ob11')) {
+    vanLeft.classList.remove('ob11')
+    vanLeft.classList.add('ob12')
+  } else if (vanLeft.classList.contains('ob12')) {
+    vanLeft.classList.remove('ob12')
+    vanLeft.classList.add('ob9')
+  }
+}
+
+function moveCarRight(carRight) {
+  if (carRight.classList.contains('ob13')) {
+    carRight.classList.remove('ob13')
+    carRight.classList.add('ob16')
+  } else if (carRight.classList.contains('ob16')) {
+    carRight.classList.remove('ob16')
+    carRight.classList.add('ob15')
+  } else if (carRight.classList.contains('ob15')) {
+    carRight.classList.remove('ob15')
+    carRight.classList.add('ob14')
+  } else if (carRight.classList.contains('ob14')) {
+    carRight.classList.remove('ob14')
+    carRight.classList.add('ob13')
+  }
+}
+
+function collision() {
+  if (
+      cells[currentPosition].classList.contains('ob1') ||
+      cells[currentPosition].classList.contains('ob2') ||
+      cells[currentPosition].classList.contains('ob7') ||
+      cells[currentPosition].classList.contains('ob8') ||
+      cells[currentPosition].classList.contains('ob9') ||
+      cells[currentPosition].classList.contains('ob10') ||
+      cells[currentPosition].classList.contains('ob15') ||
+      cells[currentPosition].classList.contains('ob16') 
+  ) {
+    removeBaby()
+    currentLives --
+    livesDisplay.innerText = currentLives
+    if (currentLives === 0) {
+      endGame()
+    }
+  } 
+}
+
+timer = setInterval(moveObstacle, 1000)
 
 // ! EVENTS
 
 // click start button function
 // keypress event function
 
+document.addEventListener('keydown', moveBaby)
 
 // ! PAGE LOAD
 
