@@ -13,6 +13,10 @@ const cyclistsRight = document.querySelectorAll('.cyclist-right')
 const vansLeft = document.querySelectorAll('.van-left')
 const carsRight = document.querySelectorAll('.car-right')
 const babyWhine = document.querySelector('#lose-life')
+const loseLifePopup = document.getElementById('life-lost-popup')
+const gameOver = document.querySelector('#game-over')
+const gameOverPopup = document.getElementById('game-over-popup')
+
 
 console.log(cells)
 const babyStartPosition = 45
@@ -70,8 +74,23 @@ function moveBaby(evt) {
 
 }
 
-function loseLife() {
+function loseLifePopupDisplay() {
   babyWhine.play()
+  loseLifePopup.style.display = 'block'
+  document.removeEventListener('keydown', moveBaby)
+  setTimeout(function() {
+    loseLifePopup.style.display = 'none'
+    document.addEventListener('keydown', moveBaby)
+  }, 2000)
+}
+
+function gameOverPopupDisplay() {
+  gameOver.play()
+  gameOverPopup.style.display = 'block'
+
+  setTimeout(function() {
+    gameOverPopup.style.display = 'none'
+  }, 3000)
 }
 
 
@@ -178,12 +197,10 @@ function collision() {
     currentLives --
     livesDisplay.innerText = currentLives 
     if (currentLives > 0)
-    loseLife()
-    alert('You lose a life!')
+    loseLifePopupDisplay()
     
-
     if (currentLives === 0) {
-      alert('Oh no! Game over!')
+      gameOverPopupDisplay()
       endGame()
     } else {
       removeBaby()

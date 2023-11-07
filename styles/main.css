@@ -57,3 +57,15 @@
 .ob3, .ob4, .ob5, .ob6, .ob11, .ob12, .ob13, .ob14 {
   background-color: #888;
 }
+
+#life-lost-popup, #game-over-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #fff;
+  padding: 20px;
+  border: 2px solid #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
