@@ -12,6 +12,7 @@ const carsLeft = document.querySelectorAll('.car-left')
 const cyclistsRight = document.querySelectorAll('.cyclist-right')
 const vansLeft = document.querySelectorAll('.van-left')
 const carsRight = document.querySelectorAll('.car-right')
+const babyWhine = document.querySelector('#lose-life')
 
 console.log(cells)
 const babyStartPosition = 45
@@ -67,6 +68,10 @@ function moveBaby(evt) {
 
   addBaby()
 
+}
+
+function loseLife() {
+  babyWhine.play()
 }
 
 
@@ -171,9 +176,14 @@ function collision() {
   ) {
     removeBaby()
     currentLives --
-    livesDisplay.innerText = currentLives
+    livesDisplay.innerText = currentLives 
+    if (currentLives > 0)
+    loseLife()
+    alert('You lose a life!')
+    
 
     if (currentLives === 0) {
+      alert('Oh no! Game over!')
       endGame()
     } else {
       removeBaby()
@@ -199,6 +209,7 @@ function win() {
 // keypress event function
 
 startButton.addEventListener('click', () => {
+  startButton.disabled = true
   timer = setInterval(moveObstacle, 1000)
   checkTimer = setInterval(check, 500)
   document.addEventListener('keydown', moveBaby)
