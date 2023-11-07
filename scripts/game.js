@@ -17,9 +17,10 @@ const loseLifePopup = document.getElementById('life-lost-popup')
 const gameOver = document.querySelector('#game-over')
 const gameOverPopup = document.getElementById('game-over-popup')
 const winGamePopup = document.getElementById('game-win-popup')
+const resetButton = document.querySelector('#reset-button')
 
 
-console.log(cells)
+//console.log(cells)
 const babyStartPosition = 45
 let currentPosition = babyStartPosition
 const width = 7
@@ -56,6 +57,14 @@ function removeBaby(){
   cells[currentPosition].classList.remove('baby')
 }
 
+function showResetButton() {
+  resetButton.style.display = 'block'
+}
+
+function hideResetButton() {
+  resetButton.style.display = 'none';
+}
+
 function moveBaby(evt) {
   const key = evt.code
 
@@ -88,6 +97,7 @@ function loseLifePopupDisplay() {
 function gameOverPopupDisplay() {
   gameOver.play()
   gameOverPopup.style.display = 'block'
+  showResetButton()
 
   setTimeout(function() {
     gameOverPopup.style.display = 'none'
@@ -98,6 +108,7 @@ function winGameDisplay() {
   const winHome = cells[currentPosition]
   winHome.classList.add('heart')
   winGamePopup.style.display = 'block'
+  showResetButton()
 }
 
 
@@ -105,6 +116,7 @@ function endGame() {
   removeBaby()
   currentPosition = babyStartPosition
   currentLives = 3
+  livesDisplay.innerText = currentLives
   clearInterval(timer)
   addBaby()
 }
@@ -232,11 +244,17 @@ function win() {
 
 startButton.addEventListener('click', () => {
   startButton.disabled = true
+  showResetButton()
   timer = setInterval(moveObstacle, 1000)
   checkTimer = setInterval(check, 500)
   document.addEventListener('keydown', moveBaby)
 })
 
+resetButton.addEventListener('click', () => {
+  endGame()
+  hideResetButton()
+  startButton.disabled = false
+})
 
 // ! PAGE LOAD
 
