@@ -3,9 +3,7 @@
 // grid
 // cells
 
-const grid = document.querySelector('.grid')
-const cells = []
-const startButton = document.getElementById('startButton')
+
 
 // ! VARIABLES
 
@@ -19,13 +17,11 @@ const startButton = document.getElementById('startButton')
 
 let babyLives = 5
 
+
 const babyStartPosition = 45
 let currentPosition = babyStartPosition
 
-const car1Positions = [28, 29, 31, 32]
-const car2Positions = [15, 17, 19]
-const vanPositions = [7, 9, 10, 12, 13]
-const cyclistPositions = [35, 38, 41]
+
 
 // ! GRID
 
@@ -34,26 +30,7 @@ const cyclistPositions = [35, 38, 41]
 // frog and obstacles on grid
 
 const width = 7
-const cellCount = width * width 
 
-function createGrid() {
-  for (let i = 0; i < cellCount; i++) {
-    const cell = document.createElement('div')
-    cell.innerText = i
-    cell.id = i
-    cell.style.width = `${100 / width}%`
-    cell.style.height = `${100 / width}%`
-    grid.appendChild(cell)
-    cells.push(cell)
-  }
-  addBaby(currentPosition)
-
-  addCar1Obstacles();
-  addCar2Obstacles();
-  addVanObstacles();
-  addCyclistObstacles();
-
-}
 
 // ! EXECUTIONS
 
@@ -80,8 +57,6 @@ function removeBaby(){
   cells[currentPosition].classList.remove('baby')
 }
 
-
-
 function keyPress(evt){
   const key = evt.code
 
@@ -100,47 +75,6 @@ function keyPress(evt){
   addBaby()
 }
 
-// Create functions to add obstacles
-function addCar1Obstacles() {
-  car1Positions.forEach((position) => {
-    const car1 = document.createElement('div');
-    car1.classList.add('car1');
-    const cellElement = document.getElementById(position);
-    cellElement.appendChild(car1);
-  });
-}
-
-function addCar2Obstacles() {
-  car2Positions.forEach((position) => {
-    const car2 = document.createElement('div');
-    car2.classList.add('car2');
-    const cellElement = document.getElementById(position);
-    cellElement.appendChild(car2);
-  });
-}
-
-function addVanObstacles() {
-  vanPositions.forEach((position) => {
-    const van = document.createElement('div');
-    van.classList.add('van');
-    const cellElement = document.getElementById(position);
-    cellElement.appendChild(van);
-  });
-}
-
-function addCyclistObstacles() {
-  cyclistPositions.forEach((position) => {
-    const cyclist = document.createElement('div');
-    cyclist.classList.add('cyclist');
-    const cellElement = document.getElementById(position);
-    cellElement.appendChild(cyclist);
-  });
-}
-
-
-
-
-
 // ! EVENTS
 
 // click start button function
@@ -157,7 +91,5 @@ function addCyclistObstacles() {
 // * Features
   // music, sound effects, transitions.
 
-document.addEventListener('keydown', keyPress)
 
-createGrid()
 

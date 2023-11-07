@@ -24,12 +24,13 @@ body {
   display: inline-block;
   aspect-ratio: 1;
   background-color: #888;
+  
 }
 
 .cyclist, .car1, .car2, .van {
   width: 100%;
   height: 100%;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
 } 
 
