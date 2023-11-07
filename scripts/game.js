@@ -16,6 +16,7 @@ const babyWhine = document.querySelector('#lose-life')
 const loseLifePopup = document.getElementById('life-lost-popup')
 const gameOver = document.querySelector('#game-over')
 const gameOverPopup = document.getElementById('game-over-popup')
+const winGamePopup = document.getElementById('game-win-popup')
 
 
 console.log(cells)
@@ -93,6 +94,12 @@ function gameOverPopupDisplay() {
   }, 3000)
 }
 
+function winGameDisplay() {
+  const winHome = cells[currentPosition]
+  winHome.classList.add('heart')
+  winGamePopup.style.display = 'block'
+}
+
 
 function endGame() {
   removeBaby()
@@ -114,8 +121,6 @@ function moveObstacle() {
   cyclistsRight.forEach(cyclistRight => moveCyclistRight(cyclistRight))
   vansLeft.forEach(vanLeft => moveVanLeft(vanLeft))
   carsRight.forEach(carRight => moveCarRight(carRight))
-  collision()
-  win()
 }
 
 function moveCarLeft(carLeft) {
@@ -213,7 +218,7 @@ function collision() {
 
 function win() {
   if (cells[currentPosition].classList.contains('home')) {
-    alert('You made it!')
+    winGameDisplay()
     endGame()
   }
 }

@@ -10,6 +10,7 @@
 .grid div {
   width: 100px;
   height: 100px;
+  display: inline-block;
 }
 
 .home {
@@ -58,7 +59,7 @@
   background-color: #888;
 }
 
-#life-lost-popup, #game-over-popup {
+#life-lost-popup, #game-over-popup, #game-win-popup {
   display: none;
   position: fixed;
   top: 50%;
@@ -69,3 +70,10 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
+
+.heart {
+  background-image: url(../assets/heart.gif);
+  background-size: contain;
+  
+}
+
