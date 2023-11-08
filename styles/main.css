@@ -13,14 +13,16 @@ body {
   flex-direction: column;
   overflow: hidden;
   transition: opacity .5s;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 header {
   height: 124px;
   width: 320px;
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  animation: pulse 3s infinite;
 }
 p {
   font-weight: bold;
@@ -136,23 +138,24 @@ p {
 
 #start-button {
   display: block;
-  animation: fontbulger 3s infinite;
+  animation: pulse 3s infinite;
 }
 
 #reset-button {
   display: none;
 }
 
-@keyframes fontbulger {
+@keyframes pulse {
   0% {
-    transform: scale(1)
+    transform: scale(1);
   }
   50% {
-    transform: scale(1.1)
+    transform: scale(1.1);
   }
   100% {
-    transform: scale(1)
+    transform: scale(1);
   }
 }
+
 
 
