@@ -3,7 +3,7 @@
 }
 
 body {
-  background-image: url(../assets/background.png);
+  background-image: url(../assets/background2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -24,6 +24,7 @@ header {
   margin-top: 50px;
   animation: pulse 3s infinite;
 }
+
 p {
   font-weight: bold;
 }
