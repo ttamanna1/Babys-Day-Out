@@ -7,9 +7,12 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+  margin: 0;
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
+  transition: opacity .5s;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 header {
@@ -17,6 +20,10 @@ header {
   width: 320px;
   display: flex;
   justify-content: center;
+  margin-top: 50px;
+}
+p {
+  font-weight: bold;
 }
 
 .grid-container {
@@ -28,7 +35,8 @@ header {
 }
 
 .grid {
-  border: 1px solid black;
+  border: transparent;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   display: grid;
   grid-template-columns: repeat(7, 1fr); 
   grid-auto-rows: 1fr; 
@@ -58,11 +66,6 @@ header {
   background-color: burlywood;
 }
 
-.cyclist-right, .car-right, .car-left, .van-left {
-  background-color: #888;
-
-}
-
 .baby {
   background-image: url(../assets/baby.png);
   background-size: contain;
@@ -89,20 +92,32 @@ header {
   background-size: contain;
 }
 
-.ob3, .ob4, .ob5, .ob6, .ob11, .ob12, .ob13, .ob14 {
+.ob3, .ob4, .ob5, .ob6, .ob11, .ob12, .ob13, .ob14, .cyclist-right, .car-right, .car-left, .van-left {
   background-color: #888;
 }
 
 #life-lost-popup, #game-over-popup, #game-win-popup {
   display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  background-color: #fff;
+  position: absolute;
+  width: 560px;
+  height: 400px;
   padding: 20px;
-  border: 2px solid #333;
+  border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
+  background-color: rgba(124, 119, 119, 0.8);
+  z-index: 1;
+  
+}
+
+.popup-text {
+  color: #fff;
+  font-size: 50px;
+  width: 560px;
+  height: 270px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .heart {
@@ -111,15 +126,18 @@ header {
   
 }
 
-#start-button {
-  display: block;
+#start-button, #reset-button {
   margin-top: 20px;
   padding: 10px 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+#start-button {
+  display: block;
 }
 
 #reset-button {
   display: none;
-  margin-top: 20px;
-  padding: 10px 50px;
 }
 

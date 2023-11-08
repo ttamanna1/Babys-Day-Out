@@ -77,7 +77,7 @@ function loseLifePopupDisplay() {
 function gameOverPopupDisplay() {
   if (!isGameOver) {
     isGameOver = true
-    babyWhine.pause()
+    bgAudio.pause()
     gameOver.play()
     document.removeEventListener('keydown', moveBaby)
     gameOverPopup.style.display = 'block'
@@ -197,24 +197,21 @@ function collision() {
       cells[currentPosition].classList.contains('ob15') ||
       cells[currentPosition].classList.contains('ob16') 
   ) {
-    if (currentLives > 0) {
     removeBaby()
     currentLives --
+
+    if (currentLives > 0) {
     livesDisplay.innerText = currentLives 
     loseLifePopupDisplay()
-    }
-
-    if (currentLives === 0) {
+    removeBaby()
+    currentPosition = babyStartPosition
+    addBaby()
+    } else {
       bgAudio.pause()
       clearInterval(timer)
       clearInterval(checkTimer)
       gameOverPopupDisplay()
-      
-    } else {
-      removeBaby()
-      currentPosition = babyStartPosition
-      addBaby()
-    }
+    } 
   }
 }
 
