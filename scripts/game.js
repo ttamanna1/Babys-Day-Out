@@ -101,7 +101,7 @@ function endGame() {
   removeBaby()
   currentPosition = babyStartPosition
   currentLives = 3
-  livesDisplay.innerText = currentLives
+  livesDisplay.innerText = '❤️❤️❤️'
   clearInterval(timer)
   addBaby()
 }
@@ -199,9 +199,9 @@ function collision() {
   ) {
     removeBaby()
     currentLives --
+    livesDisplay.innerText = currentLives ? '❤️'.repeat(currentLives) : '💔'
 
     if (currentLives > 0) {
-    livesDisplay.innerText = currentLives 
     loseLifePopupDisplay()
     removeBaby()
     currentPosition = babyStartPosition
