@@ -76,22 +76,22 @@ p {
 }
 
 .ob1, .ob2 {
-  background-image: url(../assets/car2.png);
+  background-image: url(../assets/car2.gif);
   background-size: contain;
 }
 
 .ob7, .ob8 {
-  background-image: url(../assets/cyclist.png);
+  background-image: url(../assets/cyclist.gif);
   background-size: contain;
 }
 
 .ob9, .ob10 {
-  background-image: url(../assets/van.png);
+  background-image: url(../assets/van.gif);
   background-size: contain;
 }
 
 .ob15, .ob16 {
-  background-image: url(../assets/car1.png);
+  background-image: url(../assets/car1.gif);
   background-size: contain;
 }
 
@@ -149,6 +149,7 @@ p {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: 10px;
+  opacity: 0.8;
 }
 
 #start-button {

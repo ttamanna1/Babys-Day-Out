@@ -254,7 +254,6 @@ resetButton.addEventListener('click', () => {
 
 // set lives to 3
 // set starting position of frog as const
-// set initial position of each obstacle
 
 // ! EXECUTIONS
 
