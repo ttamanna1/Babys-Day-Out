@@ -113,7 +113,7 @@ p {
 .popup-text {
   color: #fff;
   font-size: 50px;
-  width: 560px;
+  width: 520px;
   height: 270px;
   display: flex;
   justify-content: center;
@@ -131,13 +131,28 @@ p {
   padding: 10px 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border: none;
+  border-radius: 10px;
 }
 
 #start-button {
   display: block;
+  animation: fontbulger 3s infinite;
 }
 
 #reset-button {
   display: none;
 }
+
+@keyframes fontbulger {
+  0% {
+    transform: scale(1)
+  }
+  50% {
+    transform: scale(1.1)
+  }
+  100% {
+    transform: scale(1)
+  }
+}
+
 
