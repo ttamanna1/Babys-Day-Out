@@ -1,5 +1,4 @@
-
-
+// ! Variables ! //
 
 const livesDisplay = document.getElementById('lives-count')
 const startButton = document.querySelector('#start-button')
@@ -22,7 +21,7 @@ let currentLives = 3
 let timer
 let checkTimer
 
-
+// ! Functions ! //
 
 function addBaby() {
   cells[currentPosition].classList.add('baby')
@@ -70,18 +69,20 @@ function loseLifePopupDisplay() {
 }
 
 function gameOverPopupDisplay() {
+  babyWhine.pause()
   gameOver.play()
+  document.removeEventListener('keydown', moveBaby)
   gameOverPopup.style.display = 'block'
   showResetButton()
 }
 
 function winGameDisplay() {
+  document.removeEventListener('keydown', moveBaby)
   const winHome = cells[currentPosition]
   winHome.classList.add('heart')
   winGamePopup.style.display = 'block'
   showResetButton()
 }
-
 
 function endGame() {
   removeBaby()
@@ -170,6 +171,8 @@ function moveCarRight(carRight) {
   }
 }
 
+// * Functions for win/lose condition * //
+
 function collision() {
   if (
       cells[currentPosition].classList.contains('ob1') ||
@@ -181,15 +184,18 @@ function collision() {
       cells[currentPosition].classList.contains('ob15') ||
       cells[currentPosition].classList.contains('ob16') 
   ) {
+    if (currentLives > 0) {
     removeBaby()
     currentLives --
     livesDisplay.innerText = currentLives 
-    if (currentLives > 0)
     loseLifePopupDisplay()
-    
+    }
+
     if (currentLives === 0) {
-      gameOverPopupDisplay()
       clearInterval(timer)
+      clearInterval(checkTimer)
+      gameOverPopupDisplay()
+      
     } else {
       removeBaby()
       currentPosition = babyStartPosition
@@ -205,6 +211,7 @@ function win() {
   }
 }
 
+// ! Events ! //
 
 startButton.addEventListener('click', () => {
   startButton.style.display = 'none'
@@ -215,6 +222,7 @@ startButton.addEventListener('click', () => {
 })
 
 resetButton.addEventListener('click', () => {
+  document.removeEventListener('keydown', moveBaby)
   const winHome = cells[currentPosition]
   winHome.classList.remove('heart')
   endGame()
