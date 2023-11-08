@@ -1,9 +1,5 @@
-// ! VARIABLES
 
 
-// set lives to 3
-// set starting position of frog as const
-// set initial position of each obstacle
 
 const livesDisplay = document.getElementById('lives-count')
 const startButton = document.querySelector('#start-button')
@@ -19,8 +15,6 @@ const gameOverPopup = document.getElementById('game-over-popup')
 const winGamePopup = document.getElementById('game-win-popup')
 const resetButton = document.querySelector('#reset-button')
 
-
-//console.log(cells)
 const babyStartPosition = 45
 let currentPosition = babyStartPosition
 const width = 7
@@ -29,25 +23,6 @@ let timer
 let checkTimer
 
 
-
-
-
-// ! EXECUTIONS
-
-// * main game loop (setInterval) when lives are greater than 0- use keypress event using user input
-  // up arrow key pressed- move frog up by one cell except if frog is home
-  // down arrow key pressed move frog down by one cell if not in starting position
-  // left/right key pressed- move frog left/right by one cell if not at end of grid
-// function to move obstacles- need timers
-// * check if frog collides with obstacles (function to check collisions)- restart frog in starting position and lose one life 
-  // game loop continues/ game is not reset
-// check if frog reaches home and update score
-// check if frog runs out of lives
-// end game loop if frog runs out of lives or if frog reaches home and display appropriate message/score
-// reset game and load welcome page (timer after message/score display or after click event on message/score display?)
-// * if different levels are added and the frog reaches home, the game shouldn't be reset but a new loop should be passed through
-  // making the obstacles move faster using timers and/or possibly creating a bigger grid to make it more challenging
-// Function to create the baby and obstacles on the grid
 
 function addBaby() {
   cells[currentPosition].classList.add('baby')
@@ -98,10 +73,6 @@ function gameOverPopupDisplay() {
   gameOver.play()
   gameOverPopup.style.display = 'block'
   showResetButton()
-
-  setTimeout(function() {
-    gameOverPopup.style.display = 'none'
-  }, 3000)
 }
 
 function winGameDisplay() {
@@ -218,32 +189,25 @@ function collision() {
     
     if (currentLives === 0) {
       gameOverPopupDisplay()
-      endGame()
+      clearInterval(timer)
     } else {
       removeBaby()
       currentPosition = babyStartPosition
       addBaby()
     }
-  
   }
 }
 
 function win() {
   if (cells[currentPosition].classList.contains('home')) {
     winGameDisplay()
-    endGame()
+    clearInterval(timer)
   }
 }
 
 
-
-// ! EVENTS
-
-// click start button function
-// keypress event function
-
 startButton.addEventListener('click', () => {
-  startButton.disabled = true
+  startButton.style.display = 'none'
   showResetButton()
   timer = setInterval(moveObstacle, 1000)
   checkTimer = setInterval(check, 500)
@@ -251,10 +215,41 @@ startButton.addEventListener('click', () => {
 })
 
 resetButton.addEventListener('click', () => {
+  const winHome = cells[currentPosition]
+  winHome.classList.remove('heart')
   endGame()
+  gameOverPopup.style.display = 'none'
+  winGamePopup.style.display = 'none'
+  loseLifePopup.style.display = 'none'
   hideResetButton()
-  startButton.disabled = false
+  startButton.style.display = 'block'
 })
+
+// ! VARIABLES
+
+// set lives to 3
+// set starting position of frog as const
+// set initial position of each obstacle
+
+// ! EXECUTIONS
+
+// * main game loop (setInterval) when lives are greater than 0- use keypress event using user input
+  // up arrow key pressed- move frog up by one cell except if frog is home
+  // down arrow key pressed move frog down by one cell if not in starting position
+  // left/right key pressed- move frog left/right by one cell if not at end of grid
+// function to move obstacles- need timers
+// * check if frog collides with obstacles (function to check collisions)- restart frog in starting position and lose one life 
+  // game loop continues/ game is not reset
+// check if frog reaches home 
+// check if frog runs out of lives
+// end game loop if frog runs out of lives or if frog reaches home and display appropriate message
+// reset game and load welcome page
+
+
+// ! EVENTS
+
+// click start button function
+// keypress event function
 
 // ! PAGE LOAD
 

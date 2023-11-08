@@ -77,6 +77,10 @@
   
 }
 
+#start-button {
+  display: block;
+}
+
 #reset-button {
   display: none;
 }
