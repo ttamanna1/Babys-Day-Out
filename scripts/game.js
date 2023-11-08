@@ -14,6 +14,7 @@ const gameOverPopup = document.getElementById('game-over-popup')
 const winGame = document.getElementById('win')
 const winGamePopup = document.getElementById('game-win-popup')
 const resetButton = document.querySelector('#reset-button')
+const bgAudio = document.querySelector('#theme')
 
 const babyStartPosition = 45
 let currentPosition = babyStartPosition
@@ -62,11 +63,13 @@ function moveBaby(evt) {
 }
 
 function loseLifePopupDisplay() {
+  bgAudio.pause()
   babyWhine.play()
   loseLifePopup.style.display = 'block'
   document.removeEventListener('keydown', moveBaby)
   setTimeout(function() {
     loseLifePopup.style.display = 'none'
+    bgAudio.play()
     document.addEventListener('keydown', moveBaby)
   }, 2000)
 }
@@ -83,8 +86,8 @@ function gameOverPopupDisplay() {
 }
 
 function winGameDisplay() {
-  if (!isGameWon) {
-    isGameWon = true
+  if (!isWinGame) {
+    isWinGame = true
     document.removeEventListener('keydown', moveBaby)
     const winHome = cells[currentPosition]
     winHome.classList.add('heart')
@@ -202,6 +205,7 @@ function collision() {
     }
 
     if (currentLives === 0) {
+      bgAudio.pause()
       clearInterval(timer)
       clearInterval(checkTimer)
       gameOverPopupDisplay()
@@ -224,6 +228,9 @@ function win() {
 // ! Events ! //
 
 startButton.addEventListener('click', () => {
+  bgAudio.currentTime = 0
+  bgAudio.volume = 0.07
+  bgAudio.play()
   startButton.style.display = 'none'
   showResetButton()
   timer = setInterval(moveObstacle, 1000)
@@ -232,9 +239,10 @@ startButton.addEventListener('click', () => {
 })
 
 resetButton.addEventListener('click', () => {
+  bgAudio.pause()
   document.removeEventListener('keydown', moveBaby)
   isGameOver = false
-  isGameWon = false
+  isWinGame = false
   const winHome = cells[currentPosition]
   winHome.classList.remove('heart')
   endGame()

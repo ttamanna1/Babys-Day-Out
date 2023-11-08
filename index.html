@@ -8,7 +8,7 @@
   <script defer src="scripts/game.js"></script>
 </head>
 <body>
-  <header>Frogger</header>
+  <header><img src="assets/header.png" alt="Baby's Day Out"></header>
   <p class="lives">Lives: <span id="lives-count">3</span></p>
   <div class="grid-container">
       <div class="grid">
@@ -79,6 +79,9 @@
         <p>You made it!</p>
       </div>
       <div>
+        <audio id="theme">
+          <source src="assets/theme-tune.mp3">
+        </audio>
         <audio id="lose-life">
           <source src="assets/baby-whine.mp3">
         </audio>

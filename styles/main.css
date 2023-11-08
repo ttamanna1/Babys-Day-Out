@@ -10,6 +10,13 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+header {
+  height: 124px;
+  width: 320px;
+  display: flex;
+  justify-content: center;
 }
 
 .grid-container {
@@ -106,9 +113,13 @@ body {
 
 #start-button {
   display: block;
+  margin-top: 20px;
+  padding: 10px 50px;
 }
 
 #reset-button {
   display: none;
+  margin-top: 20px;
+  padding: 10px 50px;
 }
 
