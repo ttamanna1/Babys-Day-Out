@@ -109,17 +109,23 @@ p {
   text-align: center;
   background-color: rgba(124, 119, 119, 0.8);
   z-index: 1;
-  
 }
 
 .popup-text {
   color: #fff;
   font-size: 50px;
   width: 520px;
-  height: 270px;
+  height: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+#life-lost-popup img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 135px;
 }
 
 .game-over-image, .you-win {
