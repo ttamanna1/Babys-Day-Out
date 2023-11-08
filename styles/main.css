@@ -122,10 +122,18 @@ p {
   align-items: center;
 }
 
+.game-over-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 520px;
+  height: 345px;
+}
+
 .heart {
   background-image: url(../assets/heart.gif);
   background-size: contain;
-  
+
 }
 
 #start-button, #reset-button {
