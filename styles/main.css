@@ -28,6 +28,11 @@ p {
   font-weight: bold;
 }
 
+#mute-button {
+  background-color: transparent;
+  border: none;
+}
+
 .grid-container {
   height: 560px;
   width: 560px;
