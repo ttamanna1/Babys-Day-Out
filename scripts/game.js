@@ -180,7 +180,7 @@ function moveCarRight(carRight) {
     carRight.classList.remove('ob16')
     carRight.classList.add('ob15')
   } else if (carRight.classList.contains('ob15')) {
-    carRight.classList.remove('ob15')
+    carRight.classList.remove('ob15')     
     carRight.classList.add('ob14')
   } else if (carRight.classList.contains('ob14')) {
     carRight.classList.remove('ob14')
@@ -223,6 +223,7 @@ function win() {
   if (cells[currentPosition].classList.contains('home')) {
     winGameDisplay()
     clearInterval(timer)
+    clearInterval(checkTimer)
   }
 }
 
@@ -260,6 +261,7 @@ resetButton.addEventListener('click', () => {
   hideResetButton()
   startButton.style.display = 'block'
 })
+
 
 // ! VARIABLES
 

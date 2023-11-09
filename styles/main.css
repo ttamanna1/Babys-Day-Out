@@ -12,8 +12,7 @@ body {
   align-items: center;
   flex-direction: column;
   overflow: hidden;
-  transition: opacity .5s;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 
 header {
@@ -78,21 +77,25 @@ p {
 .ob1, .ob2 {
   background-image: url(../assets/car2.gif);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .ob7, .ob8 {
   background-image: url(../assets/cyclist.gif);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .ob9, .ob10 {
   background-image: url(../assets/van.gif);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .ob15, .ob16 {
   background-image: url(../assets/car1.gif);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .ob3, .ob4, .ob5, .ob6, .ob11, .ob12, .ob13, .ob14, .cyclist-right, .car-right, .car-left, .van-left {
@@ -107,8 +110,14 @@ p {
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  background-color: rgba(89, 109, 173, 0.9);
+  background-color: rgba(100, 171, 210, 0.9);
   z-index: 1;
+}
+
+.instructions-popup-text, .popup-text, #life-lost-popup img, .game-over-image, .you-win {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .instructions-popup-text {
@@ -116,10 +125,7 @@ p {
   font-size: 25px;
   height: 70px;
   margin-top: 210px;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 #life-lost-popup, #game-over-popup, #game-win-popup {
@@ -137,25 +143,18 @@ p {
 
 .popup-text {
   color: #fff;
-  font-size: 50px;
+  font-weight: bold;
+  font-size: 40px;
   width: 520px;
   height: 350px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
+
 #life-lost-popup img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 150px;
   height: 135px;
 }
 
 .game-over-image, .you-win {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 520px;
   height: 345px;
 }
@@ -163,7 +162,6 @@ p {
 .heart {
   background-image: url(../assets/heart.gif);
   background-size: contain;
-
 }
 
 #start-button, #reset-button {
