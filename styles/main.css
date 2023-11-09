@@ -24,13 +24,27 @@ header {
   animation: pulse 3s infinite;
 }
 
+.top {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 560px;
+}
+
 p {
   font-weight: bold;
 }
 
-#mute-button {
-  background-color: transparent;
-  border: none;
+#mute-button-container {
+  display: flex;
+}
+
+.mute-image {
+  cursor: pointer;
+}
+
+#unmute-image {
+  display: none;
 }
 
 .grid-container {

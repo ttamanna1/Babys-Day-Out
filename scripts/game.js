@@ -16,6 +16,9 @@ const winGamePopup = document.getElementById('game-win-popup')
 const resetButton = document.querySelector('#reset-button')
 const bgAudio = document.querySelector('#theme')
 const instructionsPopup =document.querySelector('#instructions-popup')
+const muteButton = document.getElementById('mute-button')
+const unmuteImage = document.getElementById('unmute-image');
+const muteImage = document.getElementById('mute-image')
 
 const babyStartPosition = 45
 let currentPosition = babyStartPosition
@@ -52,6 +55,18 @@ function hideInstructionsPopupDisplay() {
   instructionsPopup.style.display = 'none'
 }
 
+function toggleMute() {
+  if (bgAudio.paused) {
+    bgAudio.play()
+    unmuteImage.style.display = 'none';
+    muteImage.style.display = 'inline';
+  } else {
+    bgAudio.pause()
+    unmuteImage.style.display = 'inline';
+    muteImage.style.display = 'none'
+  }
+}
+
 function moveBaby(evt) {
   const key = evt.code
 
@@ -72,25 +87,35 @@ function moveBaby(evt) {
 }
 
 function loseLifePopupDisplay() {
-  bgAudio.pause()
+  if (!bgAudio.paused) {
+    audioWasPlaying = true
+    bgAudio.pause()
+  } else {
+    audioWasPlaying = false
+  }
   babyWhine.play()
   loseLifePopup.style.display = 'block'
   document.removeEventListener('keydown', moveBaby)
+
   setTimeout(function() {
     loseLifePopup.style.display = 'none'
-    bgAudio.play()
     document.addEventListener('keydown', moveBaby)
+    if (!isGameOver && audioWasPlaying) {
+      bgAudio.play()
+    }
   }, 2000)
 }
 
 function gameOverPopupDisplay() {
   if (!isGameOver) {
     isGameOver = true
-    bgAudio.pause()
     gameOver.play()
     document.removeEventListener('keydown', moveBaby)
     gameOverPopup.style.display = 'block'
     showResetButton()
+    if (!bgAudio.paused) {
+      bgAudio.pause()
+    }
   }
 }
 
@@ -235,9 +260,13 @@ function check () {
 // ! Events ! //
 
 startButton.addEventListener('click', () => {
-  bgAudio.currentTime = 0
-  bgAudio.volume = 0.07
-  bgAudio.play()
+  if (bgAudio.paused) {
+    bgAudio.currentTime = 0
+    bgAudio.volume = 0.07
+    bgAudio.play()
+    unmuteImage.style.display = 'none';
+    muteImage.style.display = 'inline';
+  }
   hideInstructionsPopupDisplay()
   startButton.style.display = 'none'
   showResetButton()
@@ -247,7 +276,11 @@ startButton.addEventListener('click', () => {
 })
 
 resetButton.addEventListener('click', () => {
-  bgAudio.pause()
+  if (!bgAudio.paused) {
+    bgAudio.pause()
+    unmuteImage.style.display = 'inline'
+    muteImage.style.display = 'none'
+  } 
   document.removeEventListener('keydown', moveBaby)
   isGameOver = false
   isWinGame = false
@@ -261,6 +294,9 @@ resetButton.addEventListener('click', () => {
   hideResetButton()
   startButton.style.display = 'block'
 })
+
+unmuteImage.addEventListener('click', toggleMute);
+muteImage.addEventListener('click', toggleMute);
 
 
 // ! VARIABLES
