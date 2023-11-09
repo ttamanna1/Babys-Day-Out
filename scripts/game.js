@@ -15,6 +15,7 @@ const winGame = document.getElementById('win')
 const winGamePopup = document.getElementById('game-win-popup')
 const resetButton = document.querySelector('#reset-button')
 const bgAudio = document.querySelector('#theme')
+const instructionsPopup =document.querySelector('#instructions-popup')
 
 const babyStartPosition = 45
 let currentPosition = babyStartPosition
@@ -40,7 +41,15 @@ function showResetButton() {
 }
 
 function hideResetButton() {
-  resetButton.style.display = 'none';
+  resetButton.style.display = 'none'
+}
+
+function instructionsPopupDisplay() {
+  instructionsPopup.style.display = 'block'
+}
+
+function hideInstructionsPopupDisplay() {
+  instructionsPopup.style.display = 'none'
 }
 
 function moveBaby(evt) {
@@ -104,11 +113,6 @@ function endGame() {
   livesDisplay.innerText = '❤️❤️❤️'
   clearInterval(timer)
   addBaby()
-}
-
-function check () {
-  collision()
-  win()
 }
 
 // * Functions to move obstacles * //
@@ -222,12 +226,18 @@ function win() {
   }
 }
 
+function check () {
+  collision()
+  win()
+}
+
 // ! Events ! //
 
 startButton.addEventListener('click', () => {
   bgAudio.currentTime = 0
   bgAudio.volume = 0.07
   bgAudio.play()
+  hideInstructionsPopupDisplay()
   startButton.style.display = 'none'
   showResetButton()
   timer = setInterval(moveObstacle, 1000)
@@ -243,6 +253,7 @@ resetButton.addEventListener('click', () => {
   const winHome = cells[currentPosition]
   winHome.classList.remove('heart')
   endGame()
+  instructionsPopupDisplay()
   gameOverPopup.style.display = 'none'
   winGamePopup.style.display = 'none'
   loseLifePopup.style.display = 'none'
