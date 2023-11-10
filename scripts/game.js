@@ -1,5 +1,8 @@
 // ! Variables ! //
 
+// set lives to 3
+// set starting position of frog as const
+
 const livesDisplay = document.getElementById('lives-count')
 const startButton = document.querySelector('#start-button')
 const cells = document.querySelectorAll('.grid div')
@@ -30,6 +33,18 @@ let isGameOver = false
 let isWinGame = false
 
 // ! Functions ! //
+
+// * main game loop (setInterval) when lives are greater than 0- use keypress event using user input
+  // up arrow key pressed- move frog up by one cell except if frog is home
+  // down arrow key pressed move frog down by one cell if not in starting position
+  // left/right key pressed- move frog left/right by one cell if not at end of grid
+// function to move obstacles- need timers
+// * check if frog collides with obstacles (function to check collisions)- restart frog in starting position and lose one life 
+  // game loop continues/ game is not reset
+// check if frog reaches home 
+// check if frog runs out of lives
+// end game loop if frog runs out of lives or if frog reaches home and display appropriate message
+// reset game and load welcome page
 
 function addBaby() {
   cells[currentPosition].classList.add('baby')
@@ -259,6 +274,9 @@ function check () {
 
 // ! Events ! //
 
+// click start button function
+// keypress event function
+
 startButton.addEventListener('click', () => {
   if (bgAudio.paused) {
     bgAudio.currentTime = 0
@@ -299,32 +317,6 @@ unmuteImage.addEventListener('click', toggleMute);
 muteImage.addEventListener('click', toggleMute);
 
 
-// ! VARIABLES
-
-// set lives to 3
-// set starting position of frog as const
-
-// ! EXECUTIONS
-
-// * main game loop (setInterval) when lives are greater than 0- use keypress event using user input
-  // up arrow key pressed- move frog up by one cell except if frog is home
-  // down arrow key pressed move frog down by one cell if not in starting position
-  // left/right key pressed- move frog left/right by one cell if not at end of grid
-// function to move obstacles- need timers
-// * check if frog collides with obstacles (function to check collisions)- restart frog in starting position and lose one life 
-  // game loop continues/ game is not reset
-// check if frog reaches home 
-// check if frog runs out of lives
-// end game loop if frog runs out of lives or if frog reaches home and display appropriate message
-// reset game and load welcome page
-
-
-// ! EVENTS
-
-// click start button function
-// keypress event function
-
-// ! PAGE LOAD
 
 // * Welcome Page
   // display welcome page with instructions on how to play the game
@@ -332,7 +324,7 @@ muteImage.addEventListener('click', toggleMute);
   // pressing start button removes welcome page, creates grid and starts game loop
   // start button is disabled when game loop starts and enabled when game loop ends and is reset
 // * Features
-  // music, sound effects, transitions.
+  // music, sound effects.
 
 
 
