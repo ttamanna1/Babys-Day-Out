@@ -1,4 +1,4 @@
-# Frogger
+# Baby's Day Out (Frogger Game)
 Solo project. I had one week to build my version of the Frogger game using HTML, CSS and JavaScript. My theme for my Frogger game was loosely based on the Baby’s Day Out movie where the baby needs to reach the parents in the game whilst avoiding obstacles.
 ## Game Link
 [Live deployment](https://ttamanna1.github.io/Babys-Day-Out/)
